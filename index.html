@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gratitude Fitness Trainer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Anton:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0A0A0A',
+            secondary: '#1A1A1A',
+            accent: '#D4FF3A',
+          },
+          fontFamily: {
+            heading: ['Anton', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: #0A0A0A; background: #F5F5F2; margin: 0; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Anton', sans-serif; }
+    .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+    /* Layout guard: force all top-level elements to stack vertically */
+    body > header, body > section, body > footer, body > nav,
+    #lp-root > header, #lp-root > section, #lp-root > footer, #lp-root > nav {
+      display: block !important;
+      width: 100% !important;
+      float: none !important;
+    }
+    #lp-root {
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+      overflow-x: hidden !important;
+    }
+  </style>
+</head>
+<body style="display:block; width:100%; margin:0; padding:0;">
+<div id="lp-root">
+<header class="sticky top-0 z-50 backdrop-blur-xl bg-[#F5F5F2]/80 border-b border-[#0A0A0A]/10">
+  <nav class="max-w-6xl mx-auto px-6 sm:px-8 py-4 flex items-center justify-between">
+    <a href="#hero" class="flex items-center gap-2 group">
+      <span class="w-9 h-9 bg-[#0A0A0A] flex items-center justify-center rounded-sm group-hover:bg-[#D4FF3A] transition-colors duration-300">
+        <i data-lucide="dumbbell" class="w-5 h-5 text-[#D4FF3A] group-hover:text-[#0A0A0A] transition-colors duration-300"></i>
+      </span>
+      <span style="font-family: 'Anton', sans-serif;" class="text-xl tracking-wider text-[#0A0A0A]">GRATITUDE<span class="text-[#0A0A0A]/40">.</span>FITNESS</span>
+    </a>
+
+    <div class="hidden lg:flex items-center gap-8">
+      <a href="#services" style="font-family: 'Inter', sans-serif;" class="text-sm font-medium text-[#0A0A0A]/70 hover:text-[#0A0A0A] transition-colors">Services</a>
+      <a href="#about" style="font-family: 'Inter', sans-serif;" class="text-sm font-medium text-[#0A0A0A]/70 hover:text-[#0A0A0A] transition-colors">About</a>
+      <a href="#process" style="font-family: 'Inter', sans-serif;" class="text-sm font-medium text-[#0A0A0A]/70 hover:text-[#0A0A0A] transition-colors">Process</a>
+      <a href="#testimonials" style="font-family: 'Inter', sans-serif;" class="text-sm font-medium text-[#0A0A0A]/70 hover:text-[#0A0A0A] transition-colors">Reviews</a>
+      <a href="tel:+2347013362872" style="font-family: 'Inter', sans-serif;" class="text-sm font-medium text-[#0A0A0A]/70 hover:text-[#0A0A0A] transition-colors flex items-center gap-1.5">
+        <i data-lucide="phone" class="w-3.5 h-3.5"></i> +234 701 336 2872
+      </a>
+      <a href="#contact" style="font-family: 'Inter', sans-serif;" class="text-sm font-semibold bg-[#0A0A0A] text-[#F5F5F2] px-5 py-2.5 rounded-full hover:bg-[#1A1A1A] hover:shadow-lg hover:shadow-[#0A0A0A]/20 transition-all duration-300">
+        Book Consultation
+      </a>
+    </div>
+
+    <button id="menu-toggle" class="lg:hidden w-10 h-10 flex items-center justify-center text-[#0A0A0A]" aria-label="Open menu">
+      <i data-lucide="menu" class="w-6 h-6"></i>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-[#0A0A0A]/10 bg-[#F5F5F2]">
+    <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col gap-4">
+      <a href="#services" style="font-family: 'Inter', sans-serif;" class="text-base font-medium text-[#0A0A0A] py-2">Services</a>
+      <a href="#about" style="font-family: 'Inter', sans-serif;" class="text-base font-medium text-[#0A0A0A] py-2">About</a>
+      <a href="#process" style="font-family: 'Inter', sans-serif;" class="text-base font-medium text-[#0A0A0A] py-2">Process</a>
+      <a href="#testimonials" style="font-family: 'Inter', sans-serif;" class="text-base font-medium text-[#0A0A0A] py-2">Reviews</a>
+      <a href="tel:+2347013362872" style="font-family: 'Inter', sans-serif;" class="text-base font-medium text-[#0A0A0A] py-2 flex items-center gap-2">
+        <i data-lucide="phone" class="w-4 h-4"></i> +234 701 336 2872
+      </a>
+      <a href="#contact" style="font-family: 'Inter', sans-serif;" class="text-center text-sm font-semibold bg-[#0A0A0A] text-[#F5F5F2] px-5 py-3 rounded-full mt-2">Book Consultation</a>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const btn = document.getElementById('menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      if (btn && menu) {
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+        menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
+      }
+    })();
+  </script>
+</header>
+
+<section id="hero" class="relative bg-[#F5F5F2] overflow-hidden py-20 md:py-28 lg:py-32">
+  <div class="absolute top-0 right-0 w-1/2 h-full bg-[#0A0A0A] hidden lg:block"></div>
+  <div class="absolute -top-20 -left-20 w-72 h-72 bg-[#D4FF3A]/20 rounded-full blur-3xl"></div>
+
+  <div class="relative max-w-6xl mx-auto px-6 sm:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      
+      <div class="relative z-10">
+        <div class="inline-flex items-center gap-2 bg-[#0A0A0A] text-[#F5F5F2] px-4 py-2 rounded-full mb-8">
+          <div class="flex items-center gap-0.5">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#D4FF3A] text-[#D4FF3A]"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#D4FF3A] text-[#D4FF3A]"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#D4FF3A] text-[#D4FF3A]"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#D4FF3A] text-[#D4FF3A]"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#D4FF3A] text-[#D4FF3A]"></i>
+          </div>
+          <span style="font-family: 'Inter', sans-serif;" class="text-xs font-semibold tracking-wide">4.8 · 64 GOOGLE REVIEWS</span>
+        </div>
+
+        <h1 style="font-family: 'Anton', sans-serif;" class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] text-[#0A0A0A] tracking-tight">
+          TRAIN WITH<br/>
+          GRATITUDE.<br/>
+          <span class="relative inline-block">
+            TRANSFORM
+            <span class="absolute -bottom-2 left-0 w-full h-3 bg-[#D4FF3A] -z-0"></span>
+          </span><br/>
+          WITH PURPOSE.
+        </h1>
+
+        <p style="font-family: 'Inter', sans-serif;" class="mt-8 text-lg leading-relaxed text-[#0A0A0A]/70 max-w-lg">
+          Premium 1-on-1 personal training in Kubwa, Abuja. Build strength, lose weight, and reclaim your health with coaching rooted in discipline, gratitude, and real results.
+        </p>
+
+        <div class="mt-10 flex flex-col sm:flex-row gap-4">
+          <a href="#contact" class="group inline-flex items-center justify-center gap-2 bg-[#0A0A0A] text-[#F5F5F2] px-7 py-4 rounded-full font-semibold hover:bg-[#1A1A1A] hover:scale-[1.02] transition-all duration-300 shadow-xl shadow-[#0A0A0A]/20" style="font-family: 'Inter', sans-serif;">
+            Book Free Consultation
+            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+          </a>
+          <a href="tel:+2347013362872" class="group inline-flex items-center justify-center gap-2 border-2 border-[#0A0A0A] text-[#0A0A0A] px-7 py-4 rounded-full font-semibold hover:bg-[#D4FF3A] hover:border-[#D4FF3A] transition-all duration-300" style="font-family: 'Inter', sans-serif;">
+            <i data-lucide="phone" class="w-4 h-4"></i>
+            Call +234 701 336 2872
+          </a>
+        </div>
+
+        <div class="mt-10 flex flex-wrap items-center gap-6 text-sm text-[#0A0A0A]/60" style="font-family: 'Inter', sans-serif;">
+          <div class="flex items-center gap-2">
+            <i data-lucide="map-pin" class="w-4 h-4"></i>
+            <span>Kubwa, Abuja</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>Certified Trainers</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="users" class="w-4 h-4"></i>
+            <span>500+ Transformed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative z-10">
+        <div class="relative">
+          <div class="absolute -top-6 -left-6 w-32 h-32 bg-[#D4FF3A] rounded-2xl hidden md:block"></div>
+          <div class="absolute -bottom-6 -right-6 w-40 h-40 border-4 border-[#D4FF3A] rounded-2xl hidden md:block"></div>
+          
+          <div class="relative overflow-hidden rounded-2xl shadow-2xl">
+            <img 
+              src="https://zgnpmogdjnnhpwewavnr.supabase.co/storage/v1/object/public/project-images/264fd521-757f-4753-9f6e-95ba98ffb12b/ddfc56e7-ab93-4607-b22a-3fb8fbde027c.png" 
+              alt="Personal trainer at Gratitude Fitness coaching a client through a heavy barbell strength training session in a modern premium gym in Kubwa Abuja with dramatic lighting"
+              class="w-full h-[500px] md:h-[600px] object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-tr from-[#0A0A0A]/40 via-transparent to-transparent"></div>
+          </div>
+
+          <div class="absolute bottom-6 left-6 right-6 md:left-auto md:right-6 md:max-w-xs bg-[#F5F5F2] backdrop-blur-xl p-5 rounded-2xl shadow-2xl border border-[#0A0A0A]/5">
+            <div class="flex items-start gap-3">
+              <div class="w-11 h-11 bg-[#D4FF3A] rounded-full flex items-center justify-center flex-shrink-0">
+                <i data-lucide="trending-up" class="w-5 h-5 text-[#0A0A0A]"></i>
+              </div>
+              <div>
+                <p style="font-family: 'Anton', sans-serif;" class="text-2xl text-[#0A0A0A] leading-none">10+ YEARS</p>
+                <p style="font-family: 'Inter', sans-serif;" class="text-xs text-[#0A0A0A]/60 mt-1">Coaching Excellence in Abuja</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+    (function() {
+      const btn = document.getElementById('menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      if (btn && menu) {
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+        menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
+      }
+    })();
+  </script>
+
+<section id="stats" class="py-20 md:py-28 lg:py-32 bg-[#0A0A0A] text-[#F5F5F2] relative overflow-hidden">
+  <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4FF3A] to-transparent"></div>
+  <div class="absolute -top-20 -right-20 w-96 h-96 bg-[#D4FF3A]/5 rounded-full blur-3xl"></div>
+  <div class="max-w-6xl mx-auto px-6 sm:px-8 relative">
+    <div class="flex items-center gap-3 mb-12 animate-on-scroll">
+      <div class="w-2 h-2 bg-[#D4FF3A] rounded-full animate-pulse"></div>
+      <span class="text-sm uppercase tracking-[0.2em] text-[#D4FF3A]" style="font-family: 'Inter', sans-serif;">Proven Results in Kubwa</span>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
+      <div class="animate-on-scroll group p-8 border border-white/10 rounded-2xl hover:border-[#D4FF3A]/50 hover:bg-white/5 transition-all duration-500">
+        <div class="w-12 h-12 rounded-xl bg-[#D4FF3A]/10 flex items-center justify-center mb-6 group-hover:bg-[#D4FF3A] transition-colors">
+          <i data-lucide="star" class="w-6 h-6 text-[#D4FF3A] group-hover:text-[#0A0A0A]"></i>
+        </div>
+        <div class="text-6xl md:text-7xl text-[#D4FF3A] leading-none mb-3" style="font-family: 'Anton', sans-serif; letter-spacing: 0.02em;">4.8</div>
+        <div class="text-sm uppercase tracking-wider text-white/60" style="font-family: 'Inter', sans-serif;">Google Rating</div>
+      </div>
+      <div class="animate-on-scroll group p-8 border border-white/10 rounded-2xl hover:border-[#D4FF3A]/50 hover:bg-white/5 transition-all duration-500" style="transition-delay: 100ms;">
+        <div class="w-12 h-12 rounded-xl bg-[#D4FF3A]/10 flex items-center justify-center mb-6 group-hover:bg-[#D4FF3A] transition-colors">
+          <i data-lucide="message-square-quote" class="w-6 h-6 text-[#D4FF3A] group-hover:text-[#0A0A0A]"></i>
+        </div>
+        <div class="text-6xl md:text-7xl text-[#F5F5F2] leading-none mb-3" style="font-family: 'Anton', sans-serif; letter-spacing: 0.02em;">64+</div>
+        <div class="text-sm uppercase tracking-wider text-white/60" style="font-family: 'Inter', sans-serif;">Verified Reviews</div>
+      </div>
+      <div class="animate-on-scroll group p-8 border border-white/10 rounded-2xl hover:border-[#D4FF3A]/50 hover:bg-white/5 transition-all duration-500" style="transition-delay: 200ms;">
+        <div class="w-12 h-12 rounded-xl bg-[#D4FF3A]/10 flex items-center justify-center mb-6 group-hover:bg-[#D4FF3A] transition-colors">
+          <i data-lucide="users" class="w-6 h-6 text-[#D4FF3A] group-hover:text-[#0A0A0A]"></i>
+        </div>
+        <div class="text-6xl md:text-7xl text-[#F5F5F2] leading-none mb-3" style="font-family: 'Anton', sans-serif; letter-spacing: 0.02em;">500+</div>
+        <div class="text-sm uppercase tracking-wider text-white/60" style="font-family: 'Inter', sans-serif;">Clients Transformed</div>
+      </div>
+      <div class="animate-on-scroll group p-8 border border-white/10 rounded-2xl hover:border-[#D4FF3A]/50 hover:bg-white/5 transition-all duration-500" style="transition-delay: 300ms;">
+        <div class="w-12 h-12 rounded-xl bg-[#D4FF3A]/10 flex items-center justify-center mb-6 group-hover:bg-[#D4FF3A] transition-colors">
+          <i data-lucide="award" class="w-6 h-6 text-[#D4FF3A] group-hover:text-[#0A0A0A]"></i>
+        </div>
+        <div class="text-6xl md:text-7xl text-[#F5F5F2] leading-none mb-3" style="font-family: 'Anton', sans-serif; letter-spacing: 0.02em;">10+</div>
+        <div class="text-sm uppercase tracking-wider text-white/60" style="font-family: 'Inter', sans-serif;">Years Coaching</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="py-20 md:py-28 lg:py-32 bg-[#F5F5F2] relative">
+  <div class="max-w-6xl mx-auto px-6 sm:px-8">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-6 animate-on-scroll">
+      <div>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-px bg-[#0A0A0A]"></div>
+          <span class="text-sm uppercase tracking-[0.2em] text-[#0A0A0A]" style="font-family: 'Inter', sans-serif; font-weight: 600;">What We Offer</span>
+        </div>
+        <h2 class="text-5xl md:text-6xl lg:text-7xl text-[#0A0A0A] leading-[0.95]" style="font-family: 'Anton', sans-serif; letter-spacing: 0.01em;">TRAINING BUILT<br/>FOR <span class="bg-[#D4FF3A] px-3 inline-block">REAL RESULTS.</span></h2>
+      </div>
+      <p class="text-lg leading-relaxed text-[#0A0A0A]/70 max-w-md" style="font-family: 'Inter', sans-serif;">Premium personal training programs designed at our Kubwa studio to push your limits and rewrite your story.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="animate-on-scroll group bg-[#0A0A0A] text-[#F5F5F2] p-8 rounded-2xl hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4FF3A]/20 relative overflow-hidden">
+        <div class="absolute -top-12 -right-12 w-32 h-32 bg-[#D4FF3A]/0 group-hover:bg-[#D4FF3A]/10 rounded-full blur-2xl transition-all duration-500"></div>
+        <div class="w-14 h-14 bg-[#D4FF3A] rounded-xl flex items-center justify-center mb-6">
+          <i data-lucide="dumbbell" class="w-7 h-7 text-[#0A0A0A]"></i>
+        </div>
+        <h3 class="text-2xl mb-3" style="font-family: 'Anton', sans-serif; letter-spacing: 0.02em;">1-ON-1 PERSONAL TRAINING</h3>
+        <p class="text-white/70 leading-relaxed mb-6" style="font-family: 'Inter', sans-serif;">Private, focused sessions with a certified coach who builds every rep around your goals, body, and lifestyle.</p>
+        <div class="flex items-center gap-2 text-[#D4FF3A] text-sm uppercase tracking-wider" style="font-family: 'Inter', sans-serif; font-weight: 600;">
+          <span>From ₦25k/session</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </div>
+      </div>
+
+      <div class="animate-on-scroll group bg-[#1A1A1A] text-[#F5F5F2] p-8 rounded-2xl hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4FF3A]/20 relative overflow-hidden" style="transition-delay: 75ms;">
+        <div class="absolute -top-12 -right-12 w-32 h-32 bg-[#D4FF3A]/0 group-hover:bg-[#D4FF3A]/10 rounded-full blur-2xl transition-all duration-500"></div>
+        <div class="w-14 h-14 bg-[#D4FF3A] rounded-xl flex items-center justify-center mb-6">
+          <i data-lucide="flame" class="w-7 h-7 text-[#0A0A0A]"></i>
+        </div>
+        <h3 class="text-2xl mb-3" style="font-family: 'Anton', sans-serif; letter-spacing: 0.02em;">STRENGTH & CONDITIONING</h3>
+        <p class="text-white/70 leading-relaxed mb-6" style="font-family: 'Inter', sans-serif;">Build raw power, athletic conditioning, and injury-proof movement with progressive, science-backed programming.</p>
+        <div class="flex items-center gap-2 text-[#D4FF3A] text-sm uppercase tracking-wider" style="font-family: 'Inter', sans-serif; font-weight: 600;">
+          <span>8-12 Week Programs</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </div>
+      </div>
+
+      <div class="animate-on-scroll group bg-[#0A0A0A] text-[#F5F5F2] p-8 rounded-2xl hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4FF3A]/20 relative overflow-hidden" style="transition-delay: 150ms;">
+        <div class="absolute -top-12 -right-12 w-32 h-32 bg-[#D4FF3A]/0 group-hover:bg-[#D4FF3A]/10 rounded-full blur-2xl transition-all duration-500"></div>
+        <div class="w-14 h-14 bg-[#D4FF3A] rounded-xl flex items-center justify-center mb-6">
+          <i data-lucide="trending-down" class="w-7 h-7 text-[#0A0A0A]"></i>
+        </div>
+        <h3 class="text-2xl mb-3" style="font-family: 'Anton', sans-serif; letter-spacing: 0.02em;">WEIGHT LOSS COACHING</h3>
+        <p class="text-white/70 leading-relaxed mb-6" style="font-family: 'Inter', sans-serif;">Sustainable fat-loss systems that combine training, nutrition, and accountability — no crash diets, no shortcuts.</p>
+        <div class="flex items-center gap-2 text-[#D4FF3A] text-sm uppercase tracking-wider" style="font-family: 'Inter', sans-serif; font-weight: 600;">
+          <span>12-Week Transformation</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </div>
+      </div>
+
+      <div class="animate-on-scroll group bg-[#1A1A1A] text-[#F5F5F2] p-8 rounded-2xl hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4FF3A]/20 relative overflow-hidden" style="transition-delay: 225ms;">
+        <div class="absolute -top-12 -right-12 w-32 h-32 bg-[#D4FF3A]/0 group-hover:bg-[#D4FF3A]/10 rounded-full blur-2xl transition-all duration-500"></div>
+        <div class="w-14 h-14 bg-[#D4FF3A] rounded-xl flex items-center justify-center mb-6">
+          <i data-lucide="apple" class="w-7 h-7 text-[#0A0A0A]"></i>
+        </div>
+        <h3 class="text-2xl mb-3" style="font-family: 'Anton', sans-serif; letter-spacing: 0.02em;">NUTRITION PLANNING</h3>
+        <p class="text-white/70 leading-relaxed mb-6" style="font-family: 'Inter', sans-serif;">Custom meal frameworks built around Nigerian staples — food you actually enjoy, fueling results you can see.</p>
+        <div class="flex items-center gap-2 text-[#D4FF3A] text-sm uppercase tracking-wider" style="font-family: 'Inter', sans-serif; font-weight: 600;">
+          <span>Personalized Macros</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </div>
+      </div>
+
+      <div class="animate-on-scroll group bg-[#0A0A0A] text-[#F5F5F2] p-8 rounded-2xl hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4FF3A]/20 relative overflow-hidden" style="transition-delay: 300ms;">
+        <div class="absolute -top-12 -right-12 w-32 h-32 bg-[#D4FF3A]/0 group-hover:bg-[#D4FF3A]/10 rounded-full blur-2xl transition-all duration-500"></div>
+        <div class="w-14 h-14 bg-[#D4FF3A] rounded-xl flex items-center justify-center mb-6">
+          <i data-lucide="users-round" class="w-7 h-7 text-[#0A0A0A]"></i>
+        </div>
+        <h3 class="text-2xl mb-3" style="font-family: 'Anton', sans-serif; letter-spacing: 0.02em;">GROUP HIIT SESSIONS</h3>
+        <p class="text-white/70 leading-relaxed mb-6" style="font-family: 'Inter', sans-serif;">High-energy small-group classes at our Kubwa studio. Sweat hard, laugh harder, leave stronger every time.</p>
+        <div class="flex items-center gap-2 text-[#D4FF3A] text-sm uppercase tracking-wider" style="font-family: 'Inter', sans-serif; font-weight: 600;">
+          <span>Max 8 People</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </div>
+      </div>
+
+      <div class="animate-on-scroll group bg-[#D4FF3A] text-[#0A0A0A] p-8 rounded-2xl hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4FF3A]/40 relative overflow-hidden" style="transition-delay: 375ms;">
+        <div class="absolute -top-12 -right-12 w-32 h-32 bg-[#0A0A0A]/0 group-hover:bg-[#0A0A0A]/10 rounded-full blur-2xl transition-all duration-500"></div>
+        <div class="w-14 h-14 bg-[#0A0A0A] rounded-xl flex items-center justify-center mb-6">
+          <i data-lucide="laptop" class="w-7 h-7 text-[#D4FF3A]"></i>
+        </div>
+        <h3 class="text-2xl mb-3" style="font-family: 'Anton', sans-serif; letter-spacing: 0.02em;">ONLINE COACHING</h3>
+        <p class="text-[#0A0A0A]/80 leading-relaxed mb-6" style="font-family: 'Inter', sans-serif;">Train anywhere with weekly check-ins, video form reviews, and a custom app-based program tailored to you.</p>
+        <div class="flex items-center gap-2 text-[#0A0A0A] text-sm uppercase tracking-wider" style="font-family: 'Inter', sans-serif; font-weight: 600;">
+          <span>Worldwide Access</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="py-20 md:py-28 lg:py-32 bg-[#F5F5F2] relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6 sm:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="animate-on-scroll relative order-2 lg:order-1">
+        <div class="absolute -top-6 -left-6 w-32 h-32 bg-[#D4FF3A] rounded-2xl -z-0"></div>
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+          <img src="https://zgnpmogdjnnhpwewavnr.supabase.co/storage/v1/object/public/project-images/264fd521-757f-4753-9f6e-95ba98ffb12b/d0078240-51ba-4a6b-899b-b557d2caa2bd.png" alt="Gratitude Fitness personal trainer coaching a focused client through a heavy deadlift inside a premium industrial-style studio in Kubwa Abuja" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute -bottom-6 -right-6 bg-[#0A0A0A] text-[#F5F5F2] p-6 rounded-2xl shadow-xl max-w-xs hidden md:block">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="flex gap-0.5">
+              <i data-lucide="star" class="w-4 h-4 fill-[#D4FF3A] text-[#D4FF3A]"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-[#D4FF3A] text-[#D4FF3A]"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-[#D4FF3A] text-[#D4FF3A]"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-[#D4FF3A] text-[#D4FF3A]"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-[#D4FF3A] text-[#D4FF3A]"></i>
+            </div>
+            <span class="text-[#D4FF3A]" style="font-family: 'Anton', sans-serif;">4.8</span>
+          </div>
+          <p class="text-sm text-white/70" style="font-family: 'Inter', sans-serif;">Rated by 64+ verified Google clients in Abuja</p>
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2 animate-on-scroll">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-px bg-[#0A0A0A]"></div>
+          <span class="text-sm uppercase tracking-[0.2em] text-[#0A0A0A]" style="font-family: 'Inter', sans-serif; font-weight: 600;">Our Story</span>
+        </div>
+        <h2 class="text-5xl md:text-6xl text-[#0A0A0A] leading-[0.95] mb-8" style="font-family: 'Anton', sans-serif; letter-spacing: 0.01em;">DISCIPLINE.<br/>GRATITUDE.<br/><span class="bg-[#0A0A0A] text-[#D4FF3A] px-3 inline-block">RESULTS.</span></h2>
+        <p class="text-lg leading-relaxed text-[#0A0A0A]/70 mb-6" style="font-family: 'Inter', sans-serif;">Born in the heart of Kubwa, Abuja, <strong class="text-[#0A0A0A]">Gratitude Fitness</strong> is more than a training studio — it's a movement built on the belief that every body deserves a coach who shows up, pushes hard, and celebrates every rep.</p>
+        <p class="text-lg leading-relaxed text-[#0A0A0A]/70 mb-8" style="font-family: 'Inter', sans-serif;">From busy professionals to first-time lifters, we've helped 500+ clients across the FCT rebuild their strength, confidence, and physique — one disciplined session at a time.</p>
+
+        <div class="space-y-4 mb-10">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-[#D4FF3A] rounded-lg flex items-center justify-center flex-shrink-0">
+              <i data-lucide="badge-check" class="w-5 h-5 text-[#0A0A0A]"></i>
+            </div>
+            <div>
+              <h4 class="text-[#0A0A0A] mb-1" style="font-family: 'Inter', sans-serif; font-weight: 700;">Certified Coaching Team</h4>
+              <p class="text-[#0A0A0A]/60 text-sm" style="font-family: 'Inter', sans-serif;">Internationally accredited trainers with 10+ years of hands-on experience.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-[#D4FF3A] rounded-lg flex items-center justify-center flex-shrink-0">
+              <i data-lucide="target" class="w-5 h-5 text-[#0A0A0A]"></i>
+            </div>
+            <div>
+              <h4 class="text-[#0A0A0A] mb-1" style="font-family: 'Inter', sans-serif; font-weight: 700;">Results-Driven Programs</h4>
+              <p class="text-[#0A0A0A]/60 text-sm" style="font-family: 'Inter', sans-serif;">Every program is measured, tracked, and adjusted weekly for visible progress.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-[#D4FF3A] rounded-lg flex items-center justify-center flex-shrink-0">
+              <i data-lucide="user-cog" class="w-5 h-5 text-[#0A0A0A]"></i>
+            </div>
+            <div>
+              <h4 class="text-[#0A0A0A] mb-1" style="font-family: 'Inter', sans-serif; font-weight: 700;">100% Personalized Plans</h4>
+              <p class="text-[#0A0A0A]/60 text-sm" style="font-family: 'Inter', sans-serif;">No copy-paste workouts. Built around your goals, schedule, and body.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="#contact" class="inline-flex items-center gap-3 bg-[#0A0A0A] text-[#F5F5F2] px-8 py-4 rounded-full hover:bg-[#1A1A1A] hover:gap-5 transition-all group" style="font-family: 'Inter', sans-serif; font-weight: 600;">
+          <span class="text-sm uppercase tracking-wider">Start Your Transformation</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="relative overflow-hidden py-20 md:py-28 lg:py-32" style="background-color:#0A0A0A;">
+  <div class="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full blur-3xl opacity-30" style="background-color:#D4FF3A;"></div>
+  <div class="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full blur-3xl opacity-20" style="background-color:#D4FF3A;"></div>
+  <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, #D4FF3A 1px, transparent 0); background-size: 32px 32px;"></div>
+
+  <div class="relative max-w-6xl mx-auto px-6 sm:px-8">
+    <div class="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+
+      <div class="lg:col-span-2 text-white">
+        <span class="inline-block text-sm uppercase tracking-[0.3em] mb-6 px-4 py-2 rounded-full border border-white/20" style="color:#D4FF3A;">Let's Train</span>
+        <h2 class="text-5xl md:text-6xl lg:text-7xl leading-[0.9] mb-6" style="font-family:'Anton',sans-serif; letter-spacing: 0.01em;">
+          BOOK YOUR <span style="color:#D4FF3A;">FREE</span> CONSULTATION
+        </h2>
+        <p class="text-lg leading-relaxed text-white/70 mb-10" style="font-family:'Inter',sans-serif;">
+          Ready to transform with purpose? Reach out to Gratitude Fitness and take the first step toward a stronger, healthier you. We'll respond within 24 hours.
+        </p>
+
+        <div class="space-y-5">
+          <a href="tel:+2347013362872" class="flex items-center gap-4 group cursor-pointer">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center border border-white/20 group-hover:border-transparent transition-all duration-300" style="background-color:rgba(212,255,58,0.1);">
+              <i data-lucide="phone" class="w-5 h-5" style="color:#D4FF3A;"></i>
+            </div>
+            <div class="group-hover:-translate-y-1 transition-transform duration-300">
+              <p class="text-xs uppercase tracking-widest text-white/50" style="font-family:'Inter',sans-serif;">Call Direct</p>
+              <p class="text-white text-base font-semibold" style="font-family:'Inter',sans-serif;">+234 701 336 2872</p>
+            </div>
+          </a>
+
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center border border-white/20" style="background-color:rgba(212,255,58,0.1);">
+              <i data-lucide="map-pin" class="w-5 h-5" style="color:#D4FF3A;"></i>
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-widest text-white/50" style="font-family:'Inter',sans-serif;">Visit Us</p>
+              <p class="text-white text-base font-semibold" style="font-family:'Inter',sans-serif;">Along Arsenal Hotel, No. 137 New Maitama Road, Kubwa</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center border border-white/20" style="background-color:rgba(212,255,58,0.1);">
+              <i data-lucide="clock" class="w-5 h-5" style="color:#D4FF3A;"></i>
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-widest text-white/50" style="font-family:'Inter',sans-serif;">Hours Today</p>
+              <p class="text-white text-base font-semibold" style="font-family:'Inter',sans-serif;">Open Now · Closes 12 PM</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center border border-white/20" style="background-color:rgba(212,255,58,0.1);">
+              <i data-lucide="star" class="w-5 h-5 fill-current" style="color:#D4FF3A;"></i>
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-widest text-white/50" style="font-family:'Inter',sans-serif;">Rated</p>
+              <p class="text-white text-base font-semibold" style="font-family:'Inter',sans-serif;">4.8 ★ · 64 Google Reviews</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-3">
+        <div class="relative rounded-3xl p-8 md:p-10 border border-white/20 shadow-2xl" style="background-color:rgba(255,255,255,0.05); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);">
+          <div class="absolute -top-3 left-8 px-4 py-1 rounded-full text-xs uppercase tracking-widest font-bold" style="background-color:#D4FF3A; color:#0A0A0A; font-family:'Inter',sans-serif;">
+            Start Your Journey
+          </div>
+
+          <form id="contact-form" class="space-y-6 mt-4">
+            <div>
+              <label for="name" class="block text-xs uppercase tracking-widest text-white/60 mb-2" style="font-family:'Inter',sans-serif;">Full Name</label>
+              <input type="text" id="name" name="name" required
+                class="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/15 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300"
+                style="font-family:'Inter',sans-serif; --tw-ring-color:#D4FF3A;"
+                placeholder="e.g. Chinedu Okeke">
+            </div>
+
+            <div>
+              <label for="email" class="block text-xs uppercase tracking-widest text-white/60 mb-2" style="font-family:'Inter',sans-serif;">Email Address</label>
+              <input type="email" id="email" name="email" required
+                class="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/15 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300"
+                style="font-family:'Inter',sans-serif; --tw-ring-color:#D4FF3A;"
+                placeholder="you@email.com">
+            </div>
+
+            <div>
+              <label for="message" class="block text-xs uppercase tracking-widest text-white/60 mb-2" style="font-family:'Inter',sans-serif;">Your Fitness Goals</label>
+              <textarea id="message" name="message" rows="5" required
+                class="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/15 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300 resize-none"
+                style="font-family:'Inter',sans-serif; --tw-ring-color:#D4FF3A;"
+                placeholder="Tell us about your goals — weight loss, strength, conditioning, or general fitness..."></textarea>
+            </div>
+
+            <button type="submit" id="submit-btn"
+              class="w-full group relative overflow-hidden rounded-xl py-5 px-8 font-bold text-base uppercase tracking-widest transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+              style="background-color:#D4FF3A; color:#0A0A0A; font-family:'Inter',sans-serif; box-shadow: 0 10px 40px rgba(212,255,58,0.3);">
+              <span class="flex items-center justify-center gap-3">
+                Book My Free Consultation
+                <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+              </span>
+            </button>
+
+            <p id="form-status" class="text-sm text-center" style="font-family:'Inter',sans-serif;"></p>
+
+            <p class="text-xs text-white/40 text-center pt-2" style="font-family:'Inter',sans-serif;">
+              By submitting, you agree to be contacted by Gratitude Fitness about your training journey.
+            </p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="relative overflow-hidden" style="background-color:#0A0A0A; color:#F5F5F2;">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px" style="background: linear-gradient(90deg, transparent, #D4FF3A, transparent);"></div>
+
+  <div class="max-w-6xl mx-auto px-6 sm:px-8 pt-20 pb-10">
+
+    <div class="text-center mb-16 pb-16 border-b border-white/10">
+      <h3 class="text-4xl md:text-5xl lg:text-6xl mb-4" style="font-family:'Anton',sans-serif; letter-spacing:0.02em;">
+        TRAIN WITH <span style="color:#D4FF3A;">GRATITUDE</span>.
+      </h3>
+      <p class="text-white/60 max-w-2xl mx-auto text-lg leading-relaxed" style="font-family:'Inter',sans-serif;">
+        Kubwa's premium personal training studio — built on discipline, gratitude, and results.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+      <div class="lg:col-span-1">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background-color:#D4FF3A;">
+            <i data-lucide="dumbbell" class="w-6 h-6" style="color:#0A0A0A;"></i>
+          </div>
+          <span class="text-xl tracking-wider" style="font-family:'Anton',sans-serif;">GRATITUDE FITNESS</span>
+        </div>
+        <p class="text-white/60 text-sm leading-relaxed mb-6" style="font-family:'Inter',sans-serif;">
+          Premium personal training in the heart of Kubwa, Abuja. Transforming lives one rep at a time since 2014.
+        </p>
+        <div class="flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 w-fit" style="background-color:rgba(212,255,58,0.08);">
+          <i data-lucide="star" class="w-4 h-4 fill-current" style="color:#D4FF3A;"></i>
+          <span class="text-sm font-semibold" style="font-family:'Inter',sans-serif;">4.8 · 64 Reviews</span>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-sm uppercase tracking-widest mb-6" style="color:#D4FF3A; font-family:'Inter',sans-serif;">Explore</h4>
+        <ul class="space-y-3" style="font-family:'Inter',sans-serif;">
+          <li><a href="#hero" class="text-white/70 hover:text-white transition-all duration-300 hover:-translate-y-0.5 inline-block">Home</a></li>
+          <li><a href="#services" class="text-white/70 hover:text-white transition-all duration-300 hover:-translate-y-0.5 inline-block">Services</a></li>
+          <li><a href="#about" class="text-white/70 hover:text-white transition-all duration-300 hover:-translate-y-0.5 inline-block">About</a></li>
+          <li><a href="#process" class="text-white/70 hover:text-white transition-all duration-300 hover:-translate-y-0.5 inline-block">Process</a></li>
+          <li><a href="#testimonials" class="text-white/70 hover:text-white transition-all duration-300 hover:-translate-y-0.5 inline-block">Reviews</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-sm uppercase tracking-widest mb-6" style="color:#D4FF3A; font-family:'Inter',sans-serif;">Training</h4>
+        <ul class="space-y-3" style="font-family:'Inter',sans-serif;">
+          <li><a href="#services" class="text-white/70 hover:text-white transition-all duration-300 hover:-translate-y-0.5 inline-block">1-on-1 Personal Training</a></li>
+          <li><a href="#services" class="text-white/70 hover:text-white transition-all duration-300 hover:-translate-y-0.5 inline-block">Strength & Conditioning</a></li>
+          <li><a href="#services" class="text-white/70 hover:text-white transition-all duration-300 hover:-translate-y-0.5 inline-block">Weight Loss Coaching</a></li>
+          <li><a href="#services" class="text-white/70 hover:text-white transition-all duration-300 hover:-translate-y-0.5 inline-block">Nutrition Planning</a></li>
+          <li><a href="#services" class="text-white/70 hover:text-white transition-all duration-300 hover:-translate-y-0.5 inline-block">Online Coaching</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-sm uppercase tracking-widest mb-6" style="color:#D4FF3A; font-family:'Inter',sans-serif;">Visit & Contact</h4>
+        <ul class="space-y-4" style="font-family:'Inter',sans-serif;">
+          <li class="flex items-start gap-3 text-white/70 text-sm leading-relaxed">
+            <i data-lucide="map-pin" class="w-4 h-4 mt-0.5 flex-shrink-0" style="color:#D4FF3A;"></i>
+            <span>Along Arsenal Hotel,<br>No. 137 New Maitama Road,<br>Kubwa, 901101, FCT</span>
+          </li>
+          <li>
+            <a href="tel:+2347013362872" class="flex items-center gap-3 text-white/70 hover:text-white transition-all duration-300 hover:-translate-y-0.5 text-sm">
+              <i data-lucide="phone" class="w-4 h-4 flex-shrink-0" style="color:#D4FF3A;"></i>
+              +234 701 336 2872
+            </a>
+          </li>
+          <li class="flex items-center gap-3 text-white/70 text-sm">
+            <i data-lucide="clock" class="w-4 h-4 flex-shrink-0" style="color:#D4FF3A;"></i>
+            Open · Closes 12 PM
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="pt-10 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+      <p class="text-white/50 text-sm text-center md:text-left" style="font-family:'Inter',sans-serif;">
+        © 2024 Gratitude Fitness. All rights reserved. Train with purpose.
+      </p>
+
+      <div class="flex items-center gap-3">
+        <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-1" style="background-color:rgba(255,255,255,0.03);" onmouseover="this.style.backgroundColor='#D4FF3A'; this.style.color='#0A0A0A';" onmouseout="this.style.backgroundColor='rgba(255,255,255,0.03)'; this.style.color='';">
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-1" style="background-color:rgba(255,255,255,0.03);" onmouseover="this.style.backgroundColor='#D4FF3A'; this.style.color='#0A0A0A';" onmouseout="this.style.backgroundColor='rgba(255,255,255,0.03)'; this.style.color='';">
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" aria-label="TikTok" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-1" style="background-color:rgba(255,255,255,0.03);" onmouseover="this.style.backgroundColor='#D4FF3A'; this.style.color='#0A0A0A';" onmouseout="this.style.backgroundColor='rgba(255,255,255,0.03)'; this.style.color='';">
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </a>
+        <a href="#" aria-label="YouTube" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-1" style="background-color:rgba(255,255,255,0.03);" onmouseover="this.style.backgroundColor='#D4FF3A'; this.style.color='#0A0A0A';" onmouseout="this.style.backgroundColor='rgba(255,255,255,0.03)'; this.style.color='';">
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+        </a>
+        <a href="https://wa.me/2347013362872" aria-label="WhatsApp" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-1" style="background-color:rgba(255,255,255,0.03);" onmouseover="this.style.backgroundColor='#D4FF3A'; this.style.color='#0A0A0A';" onmouseout="this.style.backgroundColor='rgba(255,255,255,0.03)'; this.style.color='';">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+</div>
+
+<script>
+  lucide.createIcons();
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+  const contactForm = document.getElementById('contact-form');
+  const formStatus = document.getElementById('form-status');
+  const submitBtn = document.getElementById('submit-btn');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      try {
+        const formData = new FormData(contactForm);
+        const response = await fetch('https://zgnpmogdjnnhpwewavnr.supabase.co/functions/v1/contact-form-submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            projectId: '264fd521-757f-4753-9f6e-95ba98ffb12b',
+            name: formData.get('name'),
+            email: formData.get('email'),
+            message: formData.get('message')
+          })
+        });
+        const data = await response.json();
+        if (response.ok) {
+          formStatus.textContent = 'Message sent successfully!';
+          formStatus.className = 'text-sm text-green-600';
+          contactForm.reset();
+        } else {
+          formStatus.textContent = data.error || 'Failed to send message.';
+          formStatus.className = 'text-sm text-red-600';
+        }
+      } catch (error) {
+        formStatus.textContent = 'Network error. Please try again.';
+        formStatus.className = 'text-sm text-red-600';
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  }
+</script>
+</body>
+</html>
